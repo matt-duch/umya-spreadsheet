@@ -217,7 +217,7 @@ fn make_buffer(spreadsheet: &Spreadsheet, is_light: bool) -> Result<std::vec::Ve
 /// * `writer` - writer to write to.
 /// # Return value
 /// * `Result` - OK is void. Err is error message.
-pub fn write_writer<W: io::Seek + io::Write>(
+pub fn write<W: io::Seek + io::Write>(
     spreadsheet: &Spreadsheet,
     writer: W,
 ) -> Result<(), XlsxError> {
@@ -233,7 +233,7 @@ pub fn write_writer<W: io::Seek + io::Write>(
 /// * `writer` - writer to write to.
 /// # Return value
 /// * `Result` - OK is void. Err is error message.
-pub fn write_writer_light<W: io::Seek + io::Write>(
+pub fn write_light<W: io::Seek + io::Write>(
     spreadsheet: &Spreadsheet,
     writer: W,
 ) -> Result<(), XlsxError> {
@@ -255,12 +255,12 @@ pub fn write_writer_light<W: io::Seek + io::Write>(
 /// let path = std::path::Path::new("./tests/result_files/zzz.xlsx");
 /// let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
 /// ```
-pub fn write<P: AsRef<Path>>(spreadsheet: &Spreadsheet, path: P) -> Result<(), XlsxError> {
+pub fn write_file<P: AsRef<Path>>(spreadsheet: &Spreadsheet, path: P) -> Result<(), XlsxError> {
     let extension = path.as_ref().extension().unwrap().to_str().unwrap();
     let path_tmp = path
         .as_ref()
         .with_extension(format!("{}{}", extension, "tmp"));
-    match write_writer(
+    match write(
         spreadsheet,
         &mut io::BufWriter::new(fs::File::create(&path_tmp)?),
     ) {
@@ -286,12 +286,15 @@ pub fn write<P: AsRef<Path>>(spreadsheet: &Spreadsheet, path: P) -> Result<(), X
 /// let path = std::path::Path::new("./tests/result_files/zzz.xlsx");
 /// let _ = umya_spreadsheet::writer::xlsx::write_light(&book, path);
 /// ```
-pub fn write_light<P: AsRef<Path>>(spreadsheet: &Spreadsheet, path: P) -> Result<(), XlsxError> {
+pub fn write_file_light<P: AsRef<Path>>(
+    spreadsheet: &Spreadsheet,
+    path: P,
+) -> Result<(), XlsxError> {
     let extension = path.as_ref().extension().unwrap().to_str().unwrap();
     let path_tmp = path
         .as_ref()
         .with_extension(format!("{}{}", extension, "tmp"));
-    match write_writer_light(
+    match write_light(
         spreadsheet,
         &mut io::BufWriter::new(fs::File::create(&path_tmp)?),
     ) {
@@ -318,7 +321,7 @@ pub fn write_light<P: AsRef<Path>>(spreadsheet: &Spreadsheet, path: P) -> Result
 /// let path = std::path::Path::new("./tests/result_files/zzz_password.xlsx");
 /// let _ = umya_spreadsheet::writer::xlsx::write_with_password(&book, path, "password");
 /// ```
-pub fn write_with_password<P: AsRef<Path>>(
+pub fn write_file_with_password<P: AsRef<Path>>(
     spreadsheet: &Spreadsheet,
     path: P,
     password: &str,
@@ -355,7 +358,7 @@ pub fn write_with_password<P: AsRef<Path>>(
 /// let path = std::path::Path::new("./tests/result_files/zzz_password.xlsx");
 /// let _ = umya_spreadsheet::writer::xlsx::write_with_password_light(&book, path, "password");
 /// ```
-pub fn write_with_password_light<P: AsRef<Path>>(
+pub fn write_file_with_password_light<P: AsRef<Path>>(
     spreadsheet: &Spreadsheet,
     path: P,
     password: &str,

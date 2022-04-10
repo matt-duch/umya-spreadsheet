@@ -23,7 +23,7 @@ fn read_and_wite() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -35,7 +35,7 @@ fn read_and_wite_with_password() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_password.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write_with_password(&book, path, "password");
+    let _ = umya_spreadsheet::writer::xlsx::write_file_with_password(&book, path, "password");
 }
 
 #[test]
@@ -55,7 +55,7 @@ fn lazy_read_and_wite() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_lazy.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -66,7 +66,7 @@ fn read_and_wite_libre2() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/libre2.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -100,7 +100,7 @@ fn lazy_read_and_wite_large_string() {
     // writer
     let start = Instant::now();
     let path = std::path::Path::new("./tests/result_files/bbb_large_string.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
     let end = start.elapsed();
     println!("write:{}.{:03}sec.", end.as_secs(), end.subsec_millis());
 }
@@ -113,7 +113,7 @@ fn lazy_read_and_wite_no_edit() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_lazy_no_edit.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 fn read_and_wite_method(book: &mut umya_spreadsheet::Spreadsheet) {
@@ -263,7 +263,7 @@ fn read_and_wite_by_empty() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_empty.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -274,7 +274,7 @@ fn lazy_read_and_wite_by_empty() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_lazy_empty.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -286,7 +286,7 @@ fn read_and_wite_xlsm() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb.xlsm");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -298,7 +298,7 @@ fn lazy_read_and_wite_xlsm() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_lazy.xlsm");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -313,7 +313,7 @@ fn lazy_read_and_wite_xlsm2() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_lazy2.xlsm");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -324,7 +324,7 @@ fn lazy_read_and_wite_xlsm_no_edit() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_lazy_no_edit.xlsm");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 fn read_and_wite_xlsm_method(book: &mut umya_spreadsheet::Spreadsheet) {
@@ -726,7 +726,7 @@ fn insert_and_remove_cells() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_insertCell.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -739,7 +739,7 @@ fn new_sheet_and_edit() {
     let _ = cell.set_value_from_string("test");
 
     let path = std::path::Path::new("./tests/result_files/bbb_new_sheet_value.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 
     let mut book = umya_spreadsheet::reader::xlsx::lazy_read(path).unwrap();
     let a2_value = book
@@ -961,7 +961,7 @@ fn new_file_and_edit() {
 
     // writer.
     let path = std::path::Path::new("./tests/result_files/eee.xlsx");
-    umya_spreadsheet::writer::xlsx::write(&book, path).unwrap();
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path).unwrap();
 }
 
 #[test]
@@ -971,7 +971,7 @@ fn new_and_wite() {
 
     // writer.
     let path = std::path::Path::new("./tests/result_files/fff.xlsx");
-    umya_spreadsheet::writer::xlsx::write(&book, path).unwrap();
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path).unwrap();
 }
 
 #[test]
@@ -1015,7 +1015,7 @@ fn witer_csv() {
 fn new_file_empty_worksheet() {
     let book = umya_spreadsheet::new_file_empty_worksheet();
     let path = std::path::Path::new("./tests/result_files/empty_worksheet.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -1026,7 +1026,7 @@ fn google() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/google.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -1037,7 +1037,7 @@ fn libre() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/libre.xlsm");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -1048,7 +1048,7 @@ fn read_and_wite_theme() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_theme.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -1061,7 +1061,7 @@ fn openpyxl() {
     assert_eq!(sheet.get_cell("A2").unwrap().get_value(), " TEST ");
 
     let path = std::path::Path::new("./tests/result_files/openpyxl.xlsx");
-    umya_spreadsheet::writer::xlsx::write(&book, path).unwrap();
+    umya_spreadsheet::writer::xlsx::write_file(&book, path).unwrap();
 }
 
 #[test]
@@ -1072,7 +1072,7 @@ fn read_and_wite_2() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_2.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -1087,7 +1087,7 @@ fn issue_110() {
     // work on 0.9
     cell.set_value_from_string("test");
     let path = std::path::Path::new("./tests/result_files/aaa_issue_110.xlsx");
-    let r = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let r = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 }
 
 #[test]
@@ -1098,9 +1098,9 @@ fn compression_test() {
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_comp_standard.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file(&book, path);
 
     // writer
     let path = std::path::Path::new("./tests/result_files/bbb_comp_light.xlsx");
-    let _ = umya_spreadsheet::writer::xlsx::write_light(&book, path);
+    let _ = umya_spreadsheet::writer::xlsx::write_file_light(&book, path);
 }
